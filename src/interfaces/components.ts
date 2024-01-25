@@ -13,3 +13,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 interface ModalProps {
   backDropClose?: boolean;
 }
+
+interface AddSalaryForm {
+  id: string;
+}

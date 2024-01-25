@@ -124,7 +124,7 @@ const EditEmployeeDataForm = ({
   }
   return (
     <Form {...form}>
-      <form id="employee-register-form" onSubmit={form.handleSubmit(onSubmit)}>
+      <form id="edit-employee-form" onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex gap-5 px-20 py-10">
           <div className="flex-1">
             <FormField
@@ -327,7 +327,7 @@ const EditEmployeeDataForm = ({
         <div className="flex justify-center">
           <ButtonWithLoading
             buttonContent="Submit"
-            loadingContent="Mohon tunggu sebentar..."
+            loadingContent="Please kind wait..."
             type="submit"
           />
         </div>

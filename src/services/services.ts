@@ -50,6 +50,15 @@ const services = (() => {
     );
   };
 
+  const postSalaryByAdmin = async (payload: any) => {
+    return axiosTokenized<any>(
+      "POST",
+      `${process.env.BASE_API_URL}/salary/employee`,
+      {},
+      payload,
+    );
+  };
+
   return {
     postLogin,
     getSpesificUserData,
@@ -57,6 +66,7 @@ const services = (() => {
     postRegisterNewEmployee,
     getEmployeeList,
     putEmployeeByAdmin,
+    postSalaryByAdmin,
   };
 })();
 

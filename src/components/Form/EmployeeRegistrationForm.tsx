@@ -366,7 +366,7 @@ const EmployeeRegistrationForm = () => {
         <div className="flex justify-center">
           <ButtonWithLoading
             buttonContent="Submit"
-            loadingContent="Mohon tunggu sebentar..."
+            loadingContent="Please kind wait..."
             type="submit"
           />
         </div>

@@ -1,3 +1,4 @@
+import AddNewSalaryForm from "@/components/Form/AddNewSalaryForm";
 import EditEmployeeDataForm from "@/components/Form/EditEmployeeDataForm";
 import HeaderLined from "@/components/Header/HeaderLined";
 import CoreLayout from "@/components/Layouts/CoreLayout";
@@ -12,7 +13,7 @@ const Employee = ({ userInformation }: IemployeeInformationPage) => {
   const { showModal } = useModal();
 
   const showSalaryForm = () => {
-    showModal(<div>asd</div>);
+    showModal(<AddNewSalaryForm id={userInformation.id} />);
   };
   return (
     <>
