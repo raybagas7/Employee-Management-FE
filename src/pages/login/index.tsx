@@ -22,7 +22,7 @@ const Login = () => {
           <LoginForm />
         </div>
       </main>
-      <Toaster richColors />
+      <Toaster richColors closeButton />
     </>
   );
 };

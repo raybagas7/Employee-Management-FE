@@ -11,14 +11,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-// import service from "@/services/services";
-// import { useToast } from "../ui/use-toast";
-// import { useRouter } from "next/router";
-// import { setCookie } from "cookies-next";
-// import ButtonWithLoading from "../Button/ButtonWithLoading";
-// import { useLoading } from "@/store/loading/useLoading";
 import Link from "next/link";
-// import HeaderLined from "../Header/HeaderLined";
 import { useState } from "react";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import HeaderLined from "../Header/HeaderLined";
@@ -28,14 +21,13 @@ import { useLoading } from "@/store/loading/useLoading";
 import services from "@/services/services";
 import { toast } from "sonner";
 import { setCookie } from "cookies-next";
-// import { InputPrimeIcon } from "../Input/InputPrimeIcon";
-// import { useUser } from "@/store/user/useUser";
+import { useRouter } from "next/router";
 
 const loginFormSchema = z.object({
   username: z
     .string()
-    .min(6, {
-      message: "Username must be at least 6 characters.",
+    .min(5, {
+      message: "Username must be at least 5 characters.",
     })
     .refine((value) => /^[a-zA-Z0-9-_]+$/.test(value), {
       message:
@@ -49,8 +41,7 @@ const loginFormSchema = z.object({
 const LoginForm = () => {
   const [showPasswod, setShowPassword] = useState<boolean>(false);
   const { hideLoadingSm, showLoadingSm } = useLoading();
-  //   const { toast } = useToast();
-  //   const router = useRouter();
+  const router = useRouter();
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -64,28 +55,41 @@ const LoginForm = () => {
   };
 
   async function onSubmit(values: z.infer<typeof loginFormSchema>) {
-    console.log(values);
     showLoadingSm();
     const { error, data, code, message } = await services.postLogin(values);
 
     console.log(error, data, code, message);
 
     if (error && code === 500) {
-      hideLoadingSm();
       toast.error("Something happened in the server");
+      hideLoadingSm();
     }
     if (error) {
-      hideLoadingSm();
       toast.error(message);
+      hideLoadingSm();
     }
     if (!error && code === 201) {
-      hideLoadingSm();
-
       // setUserData(data.data.user_data);
-      toast.success("Success Login");
-      setCookie("refreshToken", data.data.refresh_token);
-      setCookie("accessToken", data.data.access_token);
-      // router.push("/");
+      toast.success("Login success");
+      setCookie("refreshToken", data.data.refreshToken);
+      setCookie("accessToken", data.data.accessToken);
+      const {
+        error: errorUser,
+        data: dataUser,
+        code: codeUser,
+        message: messageUser,
+      } = await services.getSpesificUserData();
+      console.log(errorUser, dataUser, codeUser, messageUser);
+
+      if (dataUser.data.user.is_admin) {
+        console.log("ADMIN");
+        router.push("/admin");
+      } else {
+        console.log("normal");
+        router.push("/");
+      }
+
+      hideLoadingSm();
     }
   }
 
