@@ -13,3 +13,7 @@ interface LoginPayload {
 interface LogoutPayload {
   refreshToken: string;
 }
+
+interface IemployeeInformationPage {
+  userInformation: IUserData;
+}
