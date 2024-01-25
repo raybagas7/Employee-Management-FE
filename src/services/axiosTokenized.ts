@@ -41,17 +41,13 @@ async function refreshAccessToken() {
   try {
     const refreshToken = getCookie("refreshToken");
 
-    const response = await axios.post(
-      `${process.env.BASE_API_URL}/refresh-token`,
-      null,
-      {
-        headers: {
-          Authorization: `Bearer ${refreshToken}`,
-        },
-      },
+    const response = await axios.put(
+      `${process.env.BASE_API_URL}/authentications`,
+      { refreshToken },
+      {},
     );
 
-    const newAccessToken = response.data.data.access_token;
+    const newAccessToken = response.data.data.accessToken;
 
     setCookie("accessToken", newAccessToken, { path: "/" });
 

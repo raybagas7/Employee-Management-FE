@@ -124,8 +124,12 @@ const EditEmployeeDataForm = ({
   }
   return (
     <Form {...form}>
-      <form id="edit-employee-form" onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex gap-5 px-20 py-10">
+      <form
+        className="mt-5 rounded-lg border-[1px] border-border py-10 shadow"
+        id="edit-employee-form"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <div className="flex gap-5 px-20 pb-10">
           <div className="flex-1">
             <FormField
               control={form.control}
@@ -245,7 +249,6 @@ const EditEmployeeDataForm = ({
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="place_of_birth"
@@ -326,7 +329,7 @@ const EditEmployeeDataForm = ({
         </div>
         <div className="flex justify-center">
           <ButtonWithLoading
-            buttonContent="Submit"
+            buttonContent="Edit Employee"
             loadingContent="Please kind wait..."
             type="submit"
           />

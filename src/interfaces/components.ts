@@ -17,3 +17,9 @@ interface ModalProps {
 interface AddSalaryForm {
   id: string;
 }
+
+interface EditSalaryForm {
+  id: string;
+  salary: string;
+  role: string;
+}
