@@ -1,3 +1,4 @@
+import LoginForm from "@/components/Form/LoginForm";
 import Head from "next/head";
 import React from "react";
 
@@ -17,7 +18,7 @@ const Login = () => {
               Login
             </h1>
           </div> */}
-          {/* <LoginForm /> */}
+          <LoginForm />
         </div>
       </main>
     </>
