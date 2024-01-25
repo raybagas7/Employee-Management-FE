@@ -4,7 +4,7 @@ import { ModeToggle } from "../ui/toggle-mode";
 import { Toaster } from "../ui/sonner";
 import MainNavigation from "../Navigation/MainNavigation";
 
-const CoreLayout = ({ children }: ICoreLayout) => {
+const AdminLayout = ({ children }: ICoreLayout) => {
   return (
     <ThemeProvider attribute="class" defaultTheme="system">
       <div className={`relative flex min-h-[100dvh] flex-col overflow-hidden`}>
@@ -19,4 +19,4 @@ const CoreLayout = ({ children }: ICoreLayout) => {
   );
 };
 
-export default CoreLayout;
+export default AdminLayout;
