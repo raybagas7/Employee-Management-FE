@@ -7,10 +7,8 @@ const AdminHome = () => {
   const { userData, getEmployeeList, employeeList } = useUser();
 
   useEffect(() => {
-    if (!employeeList) {
-      getEmployeeList();
-    }
-  }, [employeeList, getEmployeeList]);
+    getEmployeeList();
+  }, [getEmployeeList]);
 
   console.log(employeeList);
 

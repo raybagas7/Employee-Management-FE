@@ -41,12 +41,22 @@ const services = (() => {
     return axiosTokenized<any>("GET", `${process.env.BASE_API_URL}/users`, {});
   };
 
+  const putEmployeeByAdmin = async (payload: any) => {
+    return axiosTokenized<any>(
+      "PUT",
+      `${process.env.BASE_API_URL}/users`,
+      {},
+      payload,
+    );
+  };
+
   return {
     postLogin,
     getSpesificUserData,
     deleteAccessToken,
     postRegisterNewEmployee,
     getEmployeeList,
+    putEmployeeByAdmin,
   };
 })();
 

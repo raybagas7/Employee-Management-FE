@@ -13,7 +13,6 @@ import {
 import { format } from "date-fns";
 import { Input } from "../ui/input";
 import { InputPrime } from "../Input/InputPrime";
-// import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
@@ -29,8 +28,9 @@ import {
 } from "../ui/select";
 import ButtonWithLoading from "../Button/ButtonWithLoading";
 import { formatDate } from "@/utils/formatDate";
-// import services from "@/services/services";
-// import { toast } from "sonner";
+import services from "@/services/services";
+import { toast } from "sonner";
+import { useRouter } from "next/router";
 
 const formSchema = z.object({
   username: z
@@ -77,6 +77,7 @@ const formSchema = z.object({
 });
 
 const EditEmployeeDataForm = ({
+  id,
   username,
   email,
   fullname,
@@ -87,6 +88,7 @@ const EditEmployeeDataForm = ({
   gender,
 }: IUserData) => {
   const convertToDate = new Date(birth_date);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -104,24 +106,21 @@ const EditEmployeeDataForm = ({
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const formattedDate = formatDate(String(values.birth_date));
-    const registerPayload = {
+    const editPayload = {
       ...values,
+      id,
       mobile_phone: `62${values.mobile_phone}`,
       birth_date: formattedDate,
     };
 
-    console.log(registerPayload);
+    const { error, message } = await services.putEmployeeByAdmin(editPayload);
 
-    // const { error, code, message } =
-    //   await services.postRegisterNewEmployee(registerPayload);
-
-    // console.log(error, code, message);
-
-    // if (error) {
-    //   toast.error(message.message);
-    // } else {
-    //   toast.success("Em");
-    // }
+    if (error) {
+      toast.error(message.message);
+    } else {
+      toast.success("Employee data updated");
+      router.push("/admin");
+    }
   }
   return (
     <Form {...form}>
