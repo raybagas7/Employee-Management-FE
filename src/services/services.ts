@@ -28,10 +28,20 @@ const services = (() => {
     );
   };
 
+  const postRegisterNewEmployee = async (payload: any) => {
+    return axiosTokenized<any>(
+      "POST",
+      `${process.env.BASE_API_URL}/users`,
+      {},
+      payload,
+    );
+  };
+
   return {
     postLogin,
     getSpesificUserData,
     deleteAccessToken,
+    postRegisterNewEmployee,
   };
 })();
 

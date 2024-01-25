@@ -1,3 +1,4 @@
+import EmployeeRegistrationForm from "@/components/Form/EmployeeRegistrationForm";
 import HeaderLined from "@/components/Header/HeaderLined";
 import CoreLayout from "@/components/Layouts/CoreLayout";
 import React, { ReactElement } from "react";
@@ -9,6 +10,7 @@ const Registration = () => {
         <HeaderLined className="text-primary">
           Employee Registration
         </HeaderLined>
+        <EmployeeRegistrationForm />
       </div>
     </main>
   );

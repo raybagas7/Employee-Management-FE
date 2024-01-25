@@ -17,10 +17,10 @@ export const useUser = create<State & Actions>((set) => ({
     set(() => ({ userData }));
   },
   getUserData: async () => {
-    const { error, data, code, message } = await services.getSpesificUserData();
+    const { error, data, message } = await services.getSpesificUserData();
 
     if (error) {
-      toast.error(message);
+      toast.error(message.message);
     } else {
       set(() => ({ userData: data.data.user }));
     }

@@ -67,7 +67,7 @@ const LoginForm = () => {
       hideLoadingSm();
     }
     if (error) {
-      toast.error(message);
+      toast.error(message.message);
       hideLoadingSm();
     }
     if (!error && code === 201) {
