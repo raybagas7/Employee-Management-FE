@@ -37,11 +37,16 @@ const services = (() => {
     );
   };
 
+  const getEmployeeList = async () => {
+    return axiosTokenized<any>("GET", `${process.env.BASE_API_URL}/users`, {});
+  };
+
   return {
     postLogin,
     getSpesificUserData,
     deleteAccessToken,
     postRegisterNewEmployee,
+    getEmployeeList,
   };
 })();
 
