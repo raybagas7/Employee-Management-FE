@@ -25,6 +25,9 @@ import HeaderLined from "../Header/HeaderLined";
 import { InputPrime } from "../Input/InputPrime";
 import ButtonWithLoading from "../Button/ButtonWithLoading";
 import { useLoading } from "@/store/loading/useLoading";
+import services from "@/services/services";
+import { toast } from "sonner";
+import { setCookie } from "cookies-next";
 // import { InputPrimeIcon } from "../Input/InputPrimeIcon";
 // import { useUser } from "@/store/user/useUser";
 
@@ -45,7 +48,7 @@ const loginFormSchema = z.object({
 
 const LoginForm = () => {
   const [showPasswod, setShowPassword] = useState<boolean>(false);
-  const { showLoadingSm } = useLoading();
+  const { hideLoadingSm, showLoadingSm } = useLoading();
   //   const { toast } = useToast();
   //   const router = useRouter();
   const form = useForm<z.infer<typeof loginFormSchema>>({
@@ -63,35 +66,27 @@ const LoginForm = () => {
   async function onSubmit(values: z.infer<typeof loginFormSchema>) {
     console.log(values);
     showLoadingSm();
-    // const { error, data, code, message } = await service.postLogin(values);
+    const { error, data, code, message } = await services.postLogin(values);
 
-    // if (error && code === 500) {
-    //   hideLoadingSm();
-    //   toast({
-    //     title: "Something happened in the server",
-    //     variant: "destructive",
-    //   });
-    // }
-    // if (error) {
-    //   hideLoadingSm();
-    //   toast({
-    //     title: message,
-    //     variant: "destructive",
-    //   });
-    // }
-    // if (!error && code === 200) {
-    //   hideLoadingSm();
-    //   console.log(data.data.user_data);
+    console.log(error, data, code, message);
 
-    //   setUserData(data.data.user_data);
-    //   toast({
-    //     title: "Success Login",
-    //     variant: "success",
-    //   });
-    //   setCookie("refreshToken", data.data.refresh_token);
-    //   setCookie("accessToken", data.data.access_token);
-    //   router.push("/");
-    // }
+    if (error && code === 500) {
+      hideLoadingSm();
+      toast.error("Something happened in the server");
+    }
+    if (error) {
+      hideLoadingSm();
+      toast.error(message);
+    }
+    if (!error && code === 201) {
+      hideLoadingSm();
+
+      // setUserData(data.data.user_data);
+      toast.success("Success Login");
+      setCookie("refreshToken", data.data.refresh_token);
+      setCookie("accessToken", data.data.access_token);
+      // router.push("/");
+    }
   }
 
   return (

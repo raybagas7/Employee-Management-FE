@@ -1,6 +1,7 @@
 import LoginForm from "@/components/Form/LoginForm";
 import Head from "next/head";
 import React from "react";
+import { Toaster } from "sonner";
 
 const Login = () => {
   return (
@@ -21,6 +22,7 @@ const Login = () => {
           <LoginForm />
         </div>
       </main>
+      <Toaster richColors />
     </>
   );
 };
