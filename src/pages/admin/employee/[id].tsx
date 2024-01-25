@@ -1,3 +1,5 @@
+import EditEmployeeDataForm from "@/components/Form/EditEmployeeDataForm";
+import HeaderLined from "@/components/Header/HeaderLined";
 import CoreLayout from "@/components/Layouts/CoreLayout";
 import { GetServerSideProps } from "next";
 import React, { ReactElement } from "react";
@@ -5,7 +7,16 @@ import React, { ReactElement } from "react";
 const Employee = ({ userInformation }: IemployeeInformationPage) => {
   console.log(userInformation);
 
-  return <div>Employee</div>;
+  return (
+    <>
+      <main className="min-w-screen min-h-screen gap-3 px-3 pb-10 pt-16 md:px-28 md:pt-32 2xl:px-72 ">
+        <div>
+          <HeaderLined className="text-primary">Edit Employee</HeaderLined>
+          <EditEmployeeDataForm {...userInformation} />
+        </div>
+      </main>
+    </>
+  );
 };
 
 export default Employee;
