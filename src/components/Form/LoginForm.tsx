@@ -22,6 +22,7 @@ import services from "@/services/services";
 import { toast } from "sonner";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/router";
+import { useUser } from "@/store/user/useUser";
 
 const loginFormSchema = z.object({
   username: z
@@ -41,6 +42,7 @@ const loginFormSchema = z.object({
 const LoginForm = () => {
   const [showPasswod, setShowPassword] = useState<boolean>(false);
   const { hideLoadingSm, showLoadingSm } = useLoading();
+  const { setUserData } = useUser();
   const router = useRouter();
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
@@ -82,10 +84,10 @@ const LoginForm = () => {
       console.log(errorUser, dataUser, codeUser, messageUser);
 
       if (dataUser.data.user.is_admin) {
-        console.log("ADMIN");
+        setUserData(dataUser.data.user);
         router.push("/admin");
       } else {
-        console.log("normal");
+        setUserData(dataUser.data.user);
         router.push("/");
       }
 
