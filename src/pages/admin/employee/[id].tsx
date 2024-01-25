@@ -9,8 +9,14 @@ const Employee = ({ userInformation }: IemployeeInformationPage) => {
     <>
       <main className="min-w-screen min-h-screen gap-3 px-3 pb-10 pt-16 md:px-28 md:pt-32 2xl:px-72 ">
         <div>
-          <HeaderLined className="text-primary">Edit Employee</HeaderLined>
+          <HeaderLined className="text-primary">
+            Edit Employee Information
+          </HeaderLined>
           <EditEmployeeDataForm {...userInformation} />
+          <HeaderLined className="mt-10 text-primary">
+            Edit Employee Salary and Role
+          </HeaderLined>
+          {userInformation.role ? "HAVE ROLE" : "NOROLE"}
         </div>
       </main>
     </>
