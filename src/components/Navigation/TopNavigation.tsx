@@ -1,7 +1,21 @@
 import React from "react";
 import Link from "next/link";
+import services from "@/services/services";
+import { deleteCookie, getCookie } from "cookies-next";
+import { useRouter } from "next/router";
 
 const TopNavigation = () => {
+  const router = useRouter();
+  const onLogout = async () => {
+    const refreshToken = getCookie("refreshToken");
+    await services.deleteAccessToken({
+      refreshToken: String(refreshToken),
+    });
+    deleteCookie("accessToken", { path: "/" });
+    deleteCookie("refreshToken", { path: "/" });
+    router.push("/login");
+  };
+
   return (
     <nav className="fixed top-0 z-[100] w-full border-b-[1px] bg-background/60 px-3 py-3 backdrop-blur md:px-28 2xl:px-72">
       <div className="flex w-full items-center justify-between gap-2 ">
@@ -23,11 +37,11 @@ const TopNavigation = () => {
               Profile
             </li>
           </Link>
-          <Link href="/">
+          <button onClick={onLogout}>
             <li className="cursor-pointer font-bold transition-colors hover:text-primary">
               Logout
             </li>
-          </Link>
+          </button>
         </ul>
       </div>
     </nav>

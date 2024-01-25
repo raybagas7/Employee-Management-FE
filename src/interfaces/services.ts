@@ -9,3 +9,7 @@ interface LoginPayload {
   username: string;
   password: string;
 }
+
+interface LogoutPayload {
+  refreshToken: string;
+}

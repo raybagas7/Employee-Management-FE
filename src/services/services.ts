@@ -19,9 +19,19 @@ const services = (() => {
     );
   };
 
+  const deleteAccessToken = async (payload: LogoutPayload) => {
+    return axiosTokenized<any>(
+      "DELETE",
+      `${process.env.BASE_API_URL}/authentications`,
+      {},
+      payload,
+    );
+  };
+
   return {
     postLogin,
     getSpesificUserData,
+    deleteAccessToken,
   };
 })();
 
