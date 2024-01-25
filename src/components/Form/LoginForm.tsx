@@ -60,8 +60,6 @@ const LoginForm = () => {
     showLoadingSm();
     const { error, data, code, message } = await services.postLogin(values);
 
-    console.log(error, data, code, message);
-
     if (error && code === 500) {
       toast.error("Something happened in the server");
       hideLoadingSm();
@@ -75,13 +73,7 @@ const LoginForm = () => {
       toast.success("Login success");
       setCookie("refreshToken", data.data.refreshToken);
       setCookie("accessToken", data.data.accessToken);
-      const {
-        error: errorUser,
-        data: dataUser,
-        code: codeUser,
-        message: messageUser,
-      } = await services.getSpesificUserData();
-      console.log(errorUser, dataUser, codeUser, messageUser);
+      const { data: dataUser } = await services.getSpesificUserData();
 
       if (dataUser.data.user.is_admin) {
         setUserData(dataUser.data.user);

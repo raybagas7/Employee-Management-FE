@@ -10,8 +10,6 @@ const AdminHome = () => {
     getEmployeeList();
   }, [getEmployeeList]);
 
-  console.log(employeeList);
-
   if (!employeeList) {
     return null;
   }

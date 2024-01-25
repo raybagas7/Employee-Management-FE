@@ -108,12 +108,8 @@ const EmployeeRegistrationForm = () => {
       birth_date: formattedDate,
     };
 
-    console.log(registerPayload);
-
-    const { error, code, message } =
+    const { error, message } =
       await services.postRegisterNewEmployee(registerPayload);
-
-    console.log(error, code, message);
 
     if (error) {
       toast.error(message.message);

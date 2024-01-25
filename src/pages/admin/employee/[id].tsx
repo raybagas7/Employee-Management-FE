@@ -5,8 +5,6 @@ import { GetServerSideProps } from "next";
 import React, { ReactElement } from "react";
 
 const Employee = ({ userInformation }: IemployeeInformationPage) => {
-  console.log(userInformation);
-
   return (
     <>
       <main className="min-w-screen min-h-screen gap-3 px-3 pb-10 pt-16 md:px-28 md:pt-32 2xl:px-72 ">
@@ -33,7 +31,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   );
 
   const userInformation = await response.json();
-  console.log(userInformation);
 
   if (!params || !params.id || response.status !== 200) {
     return {
