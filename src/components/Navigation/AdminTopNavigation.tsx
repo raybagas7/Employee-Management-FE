@@ -37,7 +37,7 @@ const AdminTopNavigation = () => {
               Registration
             </li>
           </Link>
-          <Link href="/admin">
+          <Link href="/admin/attendance">
             <li className="cursor-pointer font-bold transition-colors hover:text-primary">
               Attendance
             </li>

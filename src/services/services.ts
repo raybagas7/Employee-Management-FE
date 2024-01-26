@@ -77,6 +77,17 @@ const services = (() => {
     );
   };
 
+  const postCheckInOrOurAttendance = async (statusCheck: string) => {
+    return axiosTokenized<any>(
+      "POST",
+      `${process.env.BASE_API_URL}/attendance`,
+      {},
+      {
+        status: statusCheck,
+      },
+    );
+  };
+
   return {
     postLogin,
     getSpesificUserData,
@@ -87,6 +98,7 @@ const services = (() => {
     postSalaryByAdmin,
     putSalaryByAdmin,
     deleteSalaryByAdmin,
+    postCheckInOrOurAttendance,
   };
 })();
 
