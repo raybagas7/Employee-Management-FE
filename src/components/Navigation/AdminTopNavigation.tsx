@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { deleteCookie, getCookie } from "cookies-next";
 import services from "@/services/services";
+import { Badge } from "../ui/badge";
 
 const AdminTopNavigation = () => {
   const router = useRouter();
@@ -25,6 +26,7 @@ const AdminTopNavigation = () => {
               Employee Management
             </h1>
           </Link>
+          <Badge>Admin</Badge>
         </div>
         <ul className="flex items-center gap-5 max-md:hidden">
           <Link href="/admin">

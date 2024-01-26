@@ -32,9 +32,9 @@ const TopNavigation = () => {
               Home
             </li>
           </Link>
-          <Link href="/">
+          <Link href="/attendance">
             <li className="cursor-pointer font-bold transition-colors hover:text-primary">
-              Profile
+              Attendance
             </li>
           </Link>
           <button onClick={onLogout}>

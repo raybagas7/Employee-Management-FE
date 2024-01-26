@@ -23,3 +23,9 @@ interface EditSalaryForm {
   salary: string;
   role: string;
 }
+
+interface ILabeledContainer {
+  label?: React.ReactNode | string;
+  children?: React.ReactNode;
+  className?: string;
+}
