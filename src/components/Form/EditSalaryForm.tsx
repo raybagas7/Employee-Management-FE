@@ -86,7 +86,6 @@ const EditSalaryForm = ({ id, salary, role }: EditSalaryForm) => {
       >
         <div className="flex gap-5 px-20 pb-10">
           <div className="flex-1">
-            {" "}
             <FormField
               control={form.control}
               name="role"

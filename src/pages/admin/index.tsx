@@ -4,7 +4,7 @@ import { useUser } from "@/store/user/useUser";
 import React, { ReactElement, useEffect } from "react";
 
 const AdminHome = () => {
-  const { userData, getEmployeeList, employeeList } = useUser();
+  const { getEmployeeList, employeeList } = useUser();
 
   useEffect(() => {
     getEmployeeList();
@@ -15,8 +15,7 @@ const AdminHome = () => {
   }
 
   return (
-    <main className="min-w-screen min-h-screen gap-3 px-3 pb-10 pt-16 md:px-28 md:pt-32 2xl:px-72 ">
-      AdminHome<p>{userData?.fullname}</p>
+    <main className="min-w-screen min-h-screen gap-3 px-3 pb-10 pt-16 md:px-28 md:pt-24 2xl:px-72 ">
       <div className="grid-cols-employee-card max-md:grid-cols-mobile-employee-card mt-5 grid  gap-3 ">
         {employeeList.map((employee) => (
           <EmployeeCard key={employee.id} {...employee} />

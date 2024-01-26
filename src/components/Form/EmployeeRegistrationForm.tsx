@@ -130,8 +130,12 @@ const EmployeeRegistrationForm = () => {
   }
   return (
     <Form {...form}>
-      <form id="employee-register-form" onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex gap-5 px-20 py-10">
+      <form
+        className="relative mt-5 rounded-lg border-[1px] border-border py-10 shadow"
+        id="employee-register-form"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <div className="flex gap-5 px-20 pb-10">
           <div className="flex-1">
             <FormField
               control={form.control}

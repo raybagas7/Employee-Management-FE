@@ -1,12 +1,14 @@
 import React from "react";
-import { FaUserAlt } from "react-icons/fa";
 import { IoMdLogOut, IoIosHome } from "react-icons/io";
 import Link from "next/link";
 import { deleteCookie, getCookie } from "cookies-next";
 import { useRouter } from "next/router";
 import services from "@/services/services";
+import { MdAppRegistration } from "react-icons/md";
+import { FaClipboardList } from "react-icons/fa";
+import { FaUserAlt } from "react-icons/fa";
 
-const MobileNavigation = () => {
+const AdminMobileNavigation = () => {
   const router = useRouter();
   const onLogout = async () => {
     const refreshToken = getCookie("refreshToken");
@@ -21,16 +23,28 @@ const MobileNavigation = () => {
   return (
     <div className="fixed bottom-0 z-50 w-full rounded-t-xl border-t bg-background py-1.5 shadow md:hidden">
       <ul className="flex w-full items-center justify-evenly gap-5 ">
-        <Link href={"/attendance"}>
+        <Link href={"/admin/attendance"}>
           <li className="flex cursor-pointer flex-col items-center text-xs transition-colors hover:text-primary">
-            <FaUserAlt className="h-5 w-5" />
+            <FaClipboardList className="h-5 w-5" />
             <p>Attendance</p>
+          </li>
+        </Link>
+        <Link href={"/admin"}>
+          <li className="flex cursor-pointer flex-col items-center text-xs transition-colors hover:text-primary">
+            <IoIosHome className="h-5 w-5" />
+            <p>Home</p>
+          </li>
+        </Link>
+        <Link href={"/admin/registration"}>
+          <li className="flex cursor-pointer flex-col items-center text-xs transition-colors hover:text-primary">
+            <MdAppRegistration className="h-5 w-5" />
+            <p>Registration</p>
           </li>
         </Link>
         <Link href={"/"}>
           <li className="flex cursor-pointer flex-col items-center text-xs transition-colors hover:text-primary">
-            <IoIosHome className="h-5 w-5" />
-            <p>Home</p>
+            <FaUserAlt className="h-5 w-5" />
+            <p>Profile</p>
           </li>
         </Link>
         <button onClick={onLogout}>
@@ -44,4 +58,4 @@ const MobileNavigation = () => {
   );
 };
 
-export default MobileNavigation;
+export default AdminMobileNavigation;

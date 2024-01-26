@@ -3,6 +3,7 @@ import TopNavigation from "./TopNavigation";
 import MobileNavigation from "./MobileNavigation";
 import { useUser } from "@/store/user/useUser";
 import AdminTopNavigation from "./AdminTopNavigation";
+import AdminMobileNavigation from "./AdminMobileNavigation";
 
 const MainNavigation = () => {
   const { userData, getUserData } = useUser();
@@ -18,8 +19,17 @@ const MainNavigation = () => {
   }
   return (
     <>
-      {userData.is_admin ? <AdminTopNavigation /> : <TopNavigation />}
-      <MobileNavigation />
+      {userData.is_admin ? (
+        <>
+          <AdminTopNavigation />
+          <AdminMobileNavigation />
+        </>
+      ) : (
+        <>
+          <TopNavigation />
+          <MobileNavigation />
+        </>
+      )}
     </>
   );
 };
