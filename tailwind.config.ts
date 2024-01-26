@@ -21,6 +21,7 @@ const config = {
       gridTemplateColumns: {
         "employee-card": "repeat(auto-fill, minmax(400px, 1fr))",
         "mobile-employee-card": "repeat(auto-fill, minmax(300px, 1fr))",
+        "attendance-badge": "repeat(auto-fill, minmax(200px, 1fr))",
       },
       colors: {
         border: "hsl(var(--border))",

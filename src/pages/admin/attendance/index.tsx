@@ -1,11 +1,28 @@
 import ButtonWithLoading from "@/components/Button/ButtonWithLoading";
 import CoreLayout from "@/components/Layouts/CoreLayout";
 import services from "@/services/services";
+import { formatDate, formatTimes } from "@/utils/formatDate";
 import Head from "next/head";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const Attendance = () => {
+  const [attendance, setAttendance] = useState<IAttendanceList[]>([]);
+
+  const getAttendance = async () => {
+    const { error, data, message } = await services.getAttendanceWithToken();
+
+    if (!error) {
+      setAttendance(data.data.attendances);
+    } else {
+      console.log(message);
+    }
+  };
+
+  useEffect(() => {
+    getAttendance();
+  }, []);
+
   const attendanceCheck = async (statusCheck: string) => {
     const { error, message } =
       await services.postCheckInOrOurAttendance(statusCheck);
@@ -14,6 +31,7 @@ const Attendance = () => {
       toast.error(message.message);
     } else {
       toast.success(`You just check ${statusCheck}`);
+      getAttendance();
     }
   };
   return (
@@ -37,6 +55,30 @@ const Attendance = () => {
             className="w-full lg:w-fit"
             onClick={() => attendanceCheck("out")}
           />
+        </div>
+        <div>
+          {attendance.length > 0 ? (
+            <div className="grid-cols-attendance-badge mt-5 grid gap-3">
+              {attendance.map((attend) => (
+                <div
+                  className={`${attend.status === "in" ? "bg-green-500/70" : "bg-destructive/70"} w-full rounded-lg border-[1px] border-border p-3 text-primary-foreground shadow`}
+                  key={attend.attend_id}
+                >
+                  <p>
+                    Status: <span>Check-{attend.status}</span>
+                  </p>
+                  <p>
+                    Date: <span>{formatDate(attend.date_log)}</span>
+                  </p>
+                  <p>
+                    Time: <span>{formatTimes(attend.date_log)}</span>
+                  </p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <h2 className="mt-5 font-bold text-primary">Empty Attendance</h2>
+          )}
         </div>
       </main>
     </>

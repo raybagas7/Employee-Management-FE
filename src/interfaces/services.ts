@@ -17,3 +17,9 @@ interface LogoutPayload {
 interface IemployeeInformationPage {
   userInformation: IUserData;
 }
+
+interface IAttendanceList {
+  attend_id: string;
+  status: string;
+  date_log: string;
+}

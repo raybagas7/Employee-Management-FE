@@ -42,11 +42,6 @@ const AdminTopNavigation = () => {
               Attendance
             </li>
           </Link>
-          <Link href="/admin">
-            <li className="cursor-pointer font-bold transition-colors hover:text-primary">
-              Profile
-            </li>
-          </Link>
           <button onClick={onLogout}>
             <li className="cursor-pointer font-bold transition-colors hover:text-primary">
               Logout

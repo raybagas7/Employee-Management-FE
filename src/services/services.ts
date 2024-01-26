@@ -88,6 +88,14 @@ const services = (() => {
     );
   };
 
+  const getAttendanceWithToken = async () => {
+    return axiosTokenized<any>(
+      "GET",
+      `${process.env.BASE_API_URL}/attendance/me`,
+      {},
+    );
+  };
+
   return {
     postLogin,
     getSpesificUserData,
@@ -99,6 +107,7 @@ const services = (() => {
     putSalaryByAdmin,
     deleteSalaryByAdmin,
     postCheckInOrOurAttendance,
+    getAttendanceWithToken,
   };
 })();
 
