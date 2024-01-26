@@ -37,6 +37,15 @@ const services = (() => {
     );
   };
 
+  const postRegisterNewAdmin = async (payload: any) => {
+    return axiosBase<any>(
+      "POST",
+      `${process.env.BASE_API_URL}/users/admin`,
+      {},
+      payload,
+    );
+  };
+
   const getEmployeeList = async () => {
     return axiosTokenized<any>("GET", `${process.env.BASE_API_URL}/users`, {});
   };
@@ -108,6 +117,7 @@ const services = (() => {
     deleteSalaryByAdmin,
     postCheckInOrOurAttendance,
     getAttendanceWithToken,
+    postRegisterNewAdmin,
   };
 })();
 
