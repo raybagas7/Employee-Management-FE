@@ -34,14 +34,10 @@ const AddNewSalaryForm = ({ id }: AddSalaryForm) => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-
     const addSalaryPayload = {
       ...values,
       owner: id,
     };
-
-    console.log(addSalaryPayload);
 
     const { error, message } =
       await services.postSalaryByAdmin(addSalaryPayload);

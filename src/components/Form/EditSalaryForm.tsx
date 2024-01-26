@@ -17,6 +17,7 @@ import services from "@/services/services";
 import { toast } from "sonner";
 import { useRouter } from "next/router";
 import { useModal } from "@/store/modal/useModal";
+import { useLoading } from "@/store/loading/useLoading";
 
 const formSchema = z.object({
   role: z.string().min(1, {
@@ -27,6 +28,7 @@ const formSchema = z.object({
 
 const EditSalaryForm = ({ id, salary, role }: EditSalaryForm) => {
   const { hideModal } = useModal();
+  const { showLoadingSm, hideLoadingSm } = useLoading();
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -37,22 +39,40 @@ const EditSalaryForm = ({ id, salary, role }: EditSalaryForm) => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    showLoadingSm();
     const editSalaryPayload = {
       ...values,
       owner: id,
     };
-
-    console.log(editSalaryPayload);
 
     const { error, message } =
       await services.putSalaryByAdmin(editSalaryPayload);
 
     if (error) {
       toast.error(message.message);
+      hideLoadingSm();
     } else {
       toast.success("Salary and Role Updated");
       hideModal();
+      hideLoadingSm();
+      router.push("/admin");
+    }
+  }
+
+  async function deleteSalary() {
+    showLoadingSm();
+
+    const { error, message } = await services.deleteSalaryByAdmin({
+      owner: id,
+    });
+
+    if (error) {
+      toast.error(message.message);
+      hideLoadingSm();
+    } else {
+      toast.success("Salary and Role deleted for the employee");
+      hideModal();
+      hideLoadingSm();
       router.push("/admin");
     }
   }
@@ -60,7 +80,7 @@ const EditSalaryForm = ({ id, salary, role }: EditSalaryForm) => {
   return (
     <Form {...form}>
       <form
-        className="mt-5 rounded-lg border-[1px] border-border py-10 shadow"
+        className="relative mt-5 rounded-lg border-[1px] border-border py-10 shadow"
         id="employee-salary-form"
         onSubmit={form.handleSubmit(onSubmit)}
       >
@@ -111,11 +131,18 @@ const EditSalaryForm = ({ id, salary, role }: EditSalaryForm) => {
           </div>
         </div>
 
-        <div className="mt-5 flex justify-center">
+        <div className="mt-5 flex justify-center gap-5">
           <ButtonWithLoading
             buttonContent="Edit Salary & Role"
             loadingContent="Please kind wait..."
             type="submit"
+          />
+          <ButtonWithLoading
+            className="absolute bottom-3 right-3"
+            buttonContent="Delete Salary"
+            loadingContent="Please kind wait..."
+            onClick={deleteSalary}
+            type="button"
           />
         </div>
       </form>

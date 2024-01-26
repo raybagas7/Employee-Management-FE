@@ -68,6 +68,15 @@ const services = (() => {
     );
   };
 
+  const deleteSalaryByAdmin = async (payload: any) => {
+    return axiosTokenized<any>(
+      "DELETE",
+      `${process.env.BASE_API_URL}/salary/employee`,
+      {},
+      payload,
+    );
+  };
+
   return {
     postLogin,
     getSpesificUserData,
@@ -77,6 +86,7 @@ const services = (() => {
     putEmployeeByAdmin,
     postSalaryByAdmin,
     putSalaryByAdmin,
+    deleteSalaryByAdmin,
   };
 })();
 
